@@ -1,34 +1,21 @@
 package com.bsu.by;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
 class Sort extends Thread {
-    public int size;
     public int sortNumber;
 
-    public Sort(int size, int sortNumber) {
-        this.size = size;
+    public Sort(int sortNumber) {
         this.sortNumber = sortNumber;
     }
 
     public void run(ArrayList<Integer> array) {
         switch (sortNumber) {
-            case 1:
-                Comparators.minInt firstSort = new Comparators.minInt();
-                array.sort(firstSort);
-                break;
-            case 2:
-                Comparators.maxInt secondSort = new Comparators.maxInt();
-                array.sort(secondSort);
-                break;
-            case 3:
-                Comparators.minMeet thirdSort = new Comparators.minMeet();
-                array.sort(thirdSort);
-                break;
-            case 4:
-                Comparators.maxMeet fourthSort = new Comparators.maxMeet();
-                array.sort(fourthSort);
-                break;
+            case 1 -> array.sort((o1, o2) -> o2 - o1);
+            case 2 -> array.sort(Comparator.comparingInt(o -> o));
+            case 3 -> array.sort(((o1, o2) -> o2.toString().length() - o1.toString().length()));
+            case 4 -> array.sort((Comparator.comparingInt(o -> o.toString().length())));
         }
     }
 }
